@@ -1,1364 +1,625 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#07110b">
-
-<title>VALORAQ — Give Everything a Second Value</title>
-
-<style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-:root{
-  --green:#22c55e;
-  --green2:#16a34a;
-  --dark:#07110b;
-  --text:#101713;
-  --muted:#6b7280;
-  --soft:#f4f8f5;
-  --border:#e4ebe6;
-}
-
-body{
-  font-family:Inter,Arial,Helvetica,sans-serif;
-  background:#e9eeeb;
-  color:var(--text);
-  min-height:100vh;
-}
-
-button,input,select{
-  font:inherit;
-}
-
-button{
-  border:0;
-  cursor:pointer;
-}
-
-.app{
-  width:100%;
-  max-width:480px;
-  min-height:100vh;
-  margin:auto;
-  background:#fff;
-  position:relative;
-  padding-bottom:90px;
-  overflow:hidden;
-}
-
-/* HEADER */
-
-.header{
-  padding:20px 20px 15px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  background:rgba(255,255,255,.92);
-  position:sticky;
-  top:0;
-  z-index:15;
-  backdrop-filter:blur(15px);
-  border-bottom:1px solid #edf1ee;
-}
-
-.brand{
-  font-size:25px;
-  font-weight:900;
-  letter-spacing:1.5px;
-}
-
-.brand span{
-  color:var(--green);
-}
-
-.profile{
-  width:42px;
-  height:42px;
-  border-radius:50%;
-  background:#eafff0;
-  color:#15803d;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:800;
-}
-
-/* HOME */
-
-.home{
-  padding:24px 18px;
-}
-
-.greeting small{
-  color:#7b847e;
-  font-size:13px;
-}
-
-.greeting h1{
-  margin-top:7px;
-  font-size:30px;
-  line-height:1.12;
-  letter-spacing:-.7px;
-}
-
-.greeting p{
-  color:var(--muted);
-  margin-top:10px;
-  font-size:14px;
-  line-height:1.5;
-}
-
-/* HERO */
-
-.hero{
-  margin-top:23px;
-  border-radius:27px;
-  padding:25px;
-  min-height:245px;
-  color:#fff;
-  position:relative;
-  overflow:hidden;
-  background:
-    radial-gradient(circle at 90% 10%,#2fdf73 0,transparent 27%),
-    linear-gradient(145deg,#07110b,#12251a 70%,#0a1b10);
-  box-shadow:0 15px 35px rgba(7,17,11,.16);
-}
-
-.hero:after{
-  content:"";
-  position:absolute;
-  width:150px;
-  height:150px;
-  right:-55px;
-  bottom:-65px;
-  border-radius:50%;
-  border:30px solid rgba(34,197,94,.13);
-}
-
-.hero-label{
-  display:inline-flex;
-  padding:7px 10px;
-  border-radius:30px;
-  background:rgba(255,255,255,.1);
-  font-size:11px;
-  font-weight:700;
-  margin-bottom:18px;
-}
-
-.hero h2{
-  font-size:25px;
-  line-height:1.2;
-  max-width:290px;
-}
-
-.hero p{
-  margin-top:10px;
-  color:#c9d5ce;
-  font-size:13px;
-  line-height:1.5;
-  max-width:310px;
-}
-
-.scan-btn{
-  margin-top:20px;
-  width:100%;
-  padding:14px;
-  border-radius:14px;
-  background:var(--green);
-  color:#06210e;
-  font-weight:900;
-  box-shadow:0 8px 20px rgba(34,197,94,.22);
-  transition:.2s;
-}
-
-.scan-btn:active{
-  transform:scale(.97);
-}
-
-/* STATS */
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:9px;
-  margin-top:17px;
-}
-
-.stat{
-  padding:15px 7px;
-  background:var(--soft);
-  border:1px solid var(--border);
-  border-radius:17px;
-  text-align:center;
-}
-
-.stat strong{
-  display:block;
-  font-size:19px;
-}
-
-.stat span{
-  display:block;
-  margin-top:4px;
-  color:#7b847e;
-  font-size:10px;
-}
-
-/* SECTION */
-
-.section{
-  margin-top:27px;
-}
-
-.section-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:13px;
-}
-
-.section-head h3{
-  font-size:18px;
-}
-
-.section-head span{
-  color:var(--green2);
-  font-size:12px;
-  font-weight:800;
-}
-
-/* ACTIONS */
-
-.actions{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:11px;
-}
-
-.action{
-  text-align:left;
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:19px;
-  padding:17px;
-  transition:.2s;
-}
-
-.action:active{
-  transform:scale(.96);
-}
-
-.action-icon{
-  width:43px;
-  height:43px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:13px;
-  background:#f0fdf4;
-  font-size:22px;
-  margin-bottom:12px;
-}
-
-.action strong{
-  display:block;
-  font-size:15px;
-}
-
-.action small{
-  display:block;
-  margin-top:5px;
-  color:#78827b;
-  font-size:10px;
-  line-height:1.4;
-}
-
-/* HOW IT WORKS */
-
-.steps{
-  display:flex;
-  gap:9px;
-  overflow-x:auto;
-  padding-bottom:4px;
-}
-
-.steps::-webkit-scrollbar{
-  display:none;
-}
-
-.step{
-  min-width:125px;
-  padding:15px;
-  border-radius:17px;
-  background:#f8faf9;
-  border:1px solid var(--border);
-}
-
-.step-number{
-  width:28px;
-  height:28px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#dcfce7;
-  color:#15803d;
-  font-size:12px;
-  font-weight:900;
-  margin-bottom:11px;
-}
-
-.step strong{
-  display:block;
-  font-size:12px;
-}
-
-.step small{
-  display:block;
-  color:#7b847e;
-  font-size:10px;
-  margin-top:4px;
-  line-height:1.4;
-}
-
-/* BOTTOM NAV */
-
-.bottom-nav{
-  position:fixed;
-  bottom:0;
-  left:50%;
-  transform:translateX(-50%);
-  width:min(480px,100%);
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  padding:9px 7px calc(9px + env(safe-area-inset-bottom));
-  background:rgba(255,255,255,.94);
-  backdrop-filter:blur(18px);
-  border-top:1px solid #e6ebe8;
-  z-index:20;
-}
-
-.nav-item{
-  background:none;
-  color:#8a938d;
-  font-size:10px;
-  padding:4px;
-}
-
-.nav-item div{
-  font-size:20px;
-  margin-bottom:3px;
-}
-
-.nav-item.active{
-  color:#16a34a;
-  font-weight:800;
-}
-
-/* MODAL */
-
-.modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  z-index:40;
-  background:rgba(0,0,0,.6);
-  align-items:flex-end;
-  justify-content:center;
-}
-
-.modal.show{
-  display:flex;
-}
-
-.modal-content{
-  width:min(480px,100%);
-  max-height:94vh;
-  overflow-y:auto;
-  background:#fff;
-  border-radius:28px 28px 0 0;
-  padding:20px 18px 30px;
-  animation:slideUp .3s ease;
-}
-
-@keyframes slideUp{
-  from{
-    transform:translateY(100%);
-  }
-  to{
-    transform:translateY(0);
-  }
-}
-
-.modal-top{
-  width:45px;
-  height:5px;
-  border-radius:10px;
-  background:#d9dedb;
-  margin:0 auto 20px;
-}
-
-.modal-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:18px;
-}
-
-.modal-header h2{
-  font-size:21px;
-}
-
-.close{
-  width:35px;
-  height:35px;
-  border-radius:50%;
-  background:#f2f4f3;
-  font-size:15px;
-}
-
-/* UPLOAD */
-
-.upload{
-  border:2px dashed #cfd9d2;
-  background:#f8fbf9;
-  border-radius:20px;
-  padding:25px 15px;
-  text-align:center;
-  transition:.2s;
-}
-
-.upload-icon{
-  font-size:38px;
-  margin-bottom:8px;
-}
-
-.upload p{
-  color:#7b847e;
-  font-size:12px;
-  line-height:1.5;
-  margin-bottom:13px;
-}
-
-.upload-label{
-  display:inline-block;
-  background:#07110b;
-  color:#fff;
-  padding:11px 17px;
-  border-radius:11px;
-  font-size:12px;
-  font-weight:800;
-}
-
-#imageInput{
-  display:none;
-}
-
-#preview{
-  display:none;
-  width:100%;
-  max-height:230px;
-  object-fit:cover;
-  border-radius:18px;
-  margin-top:13px;
-}
-
-/* FORM */
-
-.field{
-  margin-top:15px;
-}
-
-.field label{
-  display:block;
-  font-size:12px;
-  font-weight:800;
-  margin-bottom:7px;
-}
-
-.field input,
-.field select{
-  width:100%;
-  padding:13px;
-  border:1px solid #d7dfda;
-  border-radius:12px;
-  outline:none;
-  background:#fff;
-}
-
-.field input:focus,
-.field select:focus{
-  border-color:#22c55e;
-  box-shadow:0 0 0 3px rgba(34,197,94,.1);
-}
-
-.analyze{
-  width:100%;
-  margin-top:18px;
-  padding:14px;
-  border-radius:13px;
-  background:#16a34a;
-  color:white;
-  font-weight:900;
-}
-
-/* LOADING */
-
-.loading{
-  display:none;
-  text-align:center;
-  padding:22px 0 5px;
-}
-
-.spinner{
-  width:38px;
-  height:38px;
-  margin:auto;
-  border:4px solid #dcfce7;
-  border-top-color:#16a34a;
-  border-radius:50%;
-  animation:spin .8s linear infinite;
-}
-
-@keyframes spin{
-  to{
-    transform:rotate(360deg);
-  }
-}
-
-.loading strong{
-  display:block;
-  margin-top:11px;
-  font-size:13px;
-}
-
-.loading small{
-  color:#7b847e;
-  font-size:11px;
-}
-
-/* RESULT */
-
-.result{
-  display:none;
-  margin-top:20px;
-  border-radius:21px;
-  overflow:hidden;
-  border:1px solid #d7f4df;
-  background:#f5fff8;
-}
-
-.result-top{
-  padding:19px;
-  background:linear-gradient(145deg,#ecfff2,#f8fffa);
-}
-
-.result-badge{
-  display:inline-block;
-  background:#dcfce7;
-  color:#15803d;
-  padding:6px 9px;
-  border-radius:20px;
-  font-size:10px;
-  font-weight:900;
-}
-
-.result h3{
-  margin-top:10px;
-  font-size:19px;
-}
-
-.value{
-  font-size:29px;
-  color:#15803d;
-  font-weight:900;
-  margin-top:7px;
-}
-
-.result-sub{
-  color:#718078;
-  font-size:11px;
-  margin-top:3px;
-}
-
-.recommend{
-  margin:0;
-  padding:17px;
-  background:white;
-  border-top:1px solid #e5f2e8;
-}
-
-.recommend-title{
-  font-size:11px;
-  color:#7b847e;
-  margin-bottom:5px;
-}
-
-.recommend strong{
-  font-size:16px;
-}
-
-.recommend p{
-  margin-top:7px;
-  color:#66716a;
-  font-size:11px;
-  line-height:1.5;
-}
-
-.result-actions{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:8px;
-  padding:0 17px 17px;
-  background:white;
-}
-
-.result-action{
-  padding:11px;
-  border-radius:11px;
-  background:#f6f8f7;
-  border:1px solid #e5ebe7;
-  font-size:11px;
-  font-weight:800;
-}
-
-/* MY ITEMS */
-
-.items-section{
-  display:none;
-  padding:22px 18px;
-}
-
-.empty{
-  text-align:center;
-  padding:55px 20px;
-  color:#7b847e;
-}
-
-.empty-icon{
-  font-size:50px;
-  margin-bottom:12px;
-}
-
-.item-card{
-  border:1px solid var(--border);
-  border-radius:17px;
-  padding:15px;
-  margin-bottom:10px;
-  background:#fff;
-}
-
-.item-card-top{
-  display:flex;
-  justify-content:space-between;
-}
-
-.item-card strong{
-  font-size:14px;
-}
-
-.item-card small{
-  display:block;
-  color:#78827b;
-  font-size:10px;
-  margin-top:5px;
-}
-
-.item-value{
-  color:#15803d;
-  font-weight:900;
-  font-size:13px;
-}
-
-/* PROFILE */
-
-.profile-section{
-  display:none;
-  padding:30px 18px;
-}
-
-.profile-box{
-  background:#07110b;
-  color:white;
-  padding:25px;
-  border-radius:23px;
-  text-align:center;
-}
-
-.big-profile{
-  width:70px;
-  height:70px;
-  margin:auto;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:50%;
-  background:#dcfce7;
-  color:#15803d;
-  font-size:23px;
-  font-weight:900;
-}
-
-.profile-box h2{
-  margin-top:12px;
-}
-
-.profile-box p{
-  color:#b9c7bf;
-  font-size:12px;
-  margin-top:5px;
-}
-
-/* TOAST */
-
-.toast{
-  position:fixed;
-  z-index:100;
-  bottom:95px;
-  left:50%;
-  transform:translate(-50%,20px);
-  opacity:0;
-  pointer-events:none;
-  background:#07110b;
-  color:white;
-  padding:12px 17px;
-  border-radius:13px;
-  font-size:12px;
-  transition:.3s;
-  max-width:90%;
-  text-align:center;
-}
-
-.toast.show{
-  opacity:1;
-  transform:translate(-50%,0);
-}
-
-@media(min-width:481px){
-  body{
-    background:#e9eeeb;
-  }
-
-  .app{
-    box-shadow:0 0 40px rgba(0,0,0,.08);
-  }
-}
-</style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>VALORAQ · Phase 1+2</title>
+    <!-- Font Awesome 6 (free icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        :root {
+            --wine: #722F37;
+            --darkwine: #4A1F26;
+            --deep: #35151B;
+            --lightwine: #F8EEF0;
+            --soft: #FCF7F8;
+            --border: #EADCDD;
+            --text: #24171A;
+            --muted: #7D6C70;
+            --radius: 24px;
+            --shadow: 0 12px 28px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(114, 47, 55, 0.06);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.10);
+        }
+
+        body {
+            background: var(--soft);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 12px;
+        }
+
+        /* mobile-first container */
+        .app-container {
+            max-width: 480px;
+            width: 100%;
+            background: white;
+            border-radius: 36px;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            position: relative;
+            min-height: 700px;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border);
+        }
+
+        /* pages */
+        .page {
+            display: none;
+            padding: 20px 20px 90px;
+            flex: 1;
+            background: white;
+            animation: fadeUp 0.2s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeUp {
+            0% { opacity: 0.6; transform: translateY(6px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ----- BOTTOM NAV ----- */
+        .bottom-nav {
+            position: sticky;
+            bottom: 0;
+            background: white;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 8px 14px;
+            backdrop-filter: blur(4px);
+            background: rgba(255, 255, 255, 0.94);
+            z-index: 20;
+            border-radius: 0 0 36px 36px;
+            margin-top: auto;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 12px;
+            color: var(--muted);
+            transition: 0.15s;
+            border: none;
+            background: transparent;
+            gap: 2px;
+            cursor: pointer;
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-weight: 500;
+            text-decoration: none;
+            font-family: inherit;
+        }
+
+        .nav-item i {
+            font-size: 22px;
+            margin-bottom: 2px;
+            transition: 0.1s;
+        }
+
+        .nav-item.active {
+            color: var(--wine);
+            background: var(--lightwine);
+            font-weight: 600;
+        }
+
+        .nav-item.active i {
+            transform: scale(1.05);
+        }
+
+        /* ----- GENERAL UI ----- */
+        .wine-gradient {
+            background: linear-gradient(145deg, var(--darkwine), var(--deep));
+            color: white;
+        }
+
+        .card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 18px 16px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            margin-bottom: 18px;
+            transition: 0.1s;
+        }
+
+        .card-glass {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(2px);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 24px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 16px;
+            border: none;
+            background: var(--wine);
+            color: white;
+            box-shadow: 0 6px 14px rgba(114, 47, 55, 0.25);
+            transition: 0.15s;
+            width: 100%;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .btn-secondary {
+            background: var(--lightwine);
+            color: var(--wine);
+            box-shadow: none;
+            border: 1px solid var(--border);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1.5px solid var(--wine);
+            color: var(--wine);
+            box-shadow: none;
+        }
+
+        .btn-sm {
+            padding: 10px 16px;
+            font-size: 14px;
+            width: auto;
+        }
+
+        .btn:active { transform: scale(0.96); }
+
+        .badge {
+            background: var(--lightwine);
+            color: var(--deep);
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .flex-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .flex-between {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .stat-box {
+            background: var(--soft);
+            border-radius: 20px;
+            padding: 12px 12px;
+            text-align: center;
+            flex: 1;
+            min-width: 70px;
+            border: 1px solid var(--border);
+        }
+
+        .stat-box .num {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--darkwine);
+        }
+
+        .stat-box .label {
+            font-size: 11px;
+            color: var(--muted);
+            margin-top: 2px;
+        }
+
+        .avatar {
+            width: 48px;
+            height: 48px;
+            background: var(--wine);
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .avatar-sm {
+            width: 40px;
+            height: 40px;
+            font-size: 16px;
+        }
+
+        /* ----- SCANNER MODAL (premium) ----- */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(3px);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+        }
+
+        .modal-card {
+            max-width: 440px;
+            width: 100%;
+            background: white;
+            border-radius: 40px;
+            padding: 24px 20px 28px;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.3);
+            animation: modalIn 0.2s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        @keyframes modalIn {
+            0% { opacity: 0; transform: scale(0.96) translateY(10px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .modal-header h3 {
+            color: var(--deep);
+            font-weight: 700;
+        }
+
+        .modal-close {
+            background: var(--lightwine);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 40px;
+            font-size: 18px;
+            color: var(--darkwine);
+            cursor: pointer;
+            transition: 0.1s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: inherit;
+        }
+
+        .modal-close:active { background: var(--border); }
+
+        .preview-img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: contain;
+            background: var(--soft);
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            margin: 8px 0 14px;
+        }
+
+        select, input[type="file"] {
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 40px;
+            border: 1px solid var(--border);
+            background: white;
+            font-size: 15px;
+            margin-bottom: 12px;
+            color: var(--text);
+            font-family: inherit;
+        }
+
+        select:focus, input:focus {
+            outline: 2px solid var(--wine);
+            outline-offset: 2px;
+        }
+
+        .file-label {
+            background: var(--lightwine);
+            padding: 12px 16px;
+            border-radius: 40px;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            border: 1px dashed var(--border);
+            color: var(--wine);
+            font-weight: 500;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        /* item cards */
+        .item-card {
+            background: white;
+            border-radius: 24px;
+            padding: 14px;
+            border: 1px solid var(--border);
+            margin-bottom: 14px;
+            display: flex;
+            gap: 14px;
+            box-shadow: var(--shadow);
+            align-items: center;
+        }
+
+        .item-card img {
+            width: 68px;
+            height: 68px;
+            object-fit: cover;
+            border-radius: 18px;
+            background: var(--soft);
+            border: 1px solid var(--border);
+        }
+
+        .item-info {
+            flex: 1;
+        }
+
+        .item-info .title {
+            font-weight: 700;
+            color: var(--deep);
+        }
+
+        .item-info .sub {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .item-info .value-tag {
+            font-weight: 700;
+            color: var(--wine);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 10px;
+            color: var(--muted);
+        }
+
+        .empty-state i {
+            font-size: 48px;
+            color: var(--border);
+            margin-bottom: 14px;
+        }
+
+        /* profile */
+        .profile-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .profile-avatar {
+            width: 90px;
+            height: 90px;
+            background: var(--wine);
+            border-radius: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 38px;
+            color: white;
+            margin-bottom: 10px;
+            box-shadow: 0 8px 20px rgba(114,47,55,0.2);
+        }
+
+        .phase-badge {
+            background: var(--lightwine);
+            border-radius: 60px;
+            padding: 6px 14px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--wine);
+            display: inline-block;
+        }
+
+        .about-note {
+            background: var(--soft);
+            border-radius: 20px;
+            padding: 14px;
+            border-left: 4px solid var(--wine);
+            margin-top: 12px;
+            font-size: 14px;
+            color: var(--text);
+        }
+
+        .loader {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid var(--lightwine);
+            border-radius: 50%;
+            border-top-color: var(--wine);
+            animation: spin 0.7s linear infinite;
+            margin-right: 8px;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* misc */
+        .text-muted { color: var(--muted); }
+        .text-wine { color: var(--wine); }
+        .fw-bold { font-weight: 700; }
+        .mt-2 { margin-top: 12px; }
+        .mb-2 { margin-bottom: 12px; }
+        .gap-1 { gap: 6px; }
+
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin: 10px 0 6px;
+        }
+
+        .action-item {
+            background: var(--soft);
+            border-radius: 60px;
+            padding: 8px 4px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--darkwine);
+            border: 1px solid transparent;
+        }
+
+        .action-item i { display: block; font-size: 20px; margin-bottom: 2px; }
+        .action-item.active-cat { border-color: var(--wine); background: var(--lightwine); }
+
+        .loading-text i { animation: pulse 1s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } }
+        
+        /* responsive */
+        @media (max-width: 400px) {
+            .stat-box .num { font-size: 18px; }
+            .action-item { font-size: 10px; }
+            .action-item i { font-size: 16px; }
+        }
+    </style>
 </head>
-
 <body>
+<div class="app-container" id="app">
 
-<div class="app">
+    <!-- HOME PAGE -->
+    <div class="page active" id="page-home">
+        <div class="flex-between" style="margin-bottom: 6px;">
+            <div class="flex-row">
+                <span style="font-weight:800; font-size:22px; color:var(--deep);">VALORAQ</span>
+                <span style="font-size:12px; background:var(--wine); color:white; padding:2px 10px; border-radius:30px;">α</span>
+            </div>
+            <div class="avatar avatar-sm" id="profileAvatarHome">👤</div>
+        </div>
+        <p style="color:var(--muted); font-size:14px; margin-bottom:4px;">Give Everything a Second Value.</p>
+        <p style="font-size:13px; color:var(--muted);">“Your unused things deserve better.”</p>
 
-<header class="header">
-  <div class="brand">VALORA<span>Q</span></div>
+        <button class="btn" id="openScannerBtn" style="margin: 16px 0 12px;"><i class="fas fa-camera"></i> 📸 Scan an Item</button>
 
-  <button class="profile" onclick="showPage('profile')">
-    BS
-  </button>
-</header>
+        <div class="flex-row" style="gap:6px; margin: 4px 0 12px;">
+            <div class="stat-box"><span class="num" id="statItems">0</span><div class="label">Items Added</div></div>
+            <div class="stat-box"><span class="num" id="statValue">₹0</span><div class="label">Value Found</div></div>
+            <div class="stat-box"><span class="num" id="statWaste">0 kg</span><div class="label">Waste Saved</div></div>
+        </div>
 
+        <div class="action-grid">
+            <div class="action-item"><i class="fas fa-coins"></i> Sell</div>
+            <div class="action-item"><i class="fas fa-heart"></i> Donate</div>
+            <div class="action-item"><i class="fas fa-tools"></i> Repair</div>
+            <div class="action-item"><i class="fas fa-recycle"></i> Recycle</div>
+        </div>
 
-<!-- HOME -->
-
-<main class="home" id="homePage">
-
-  <div class="greeting">
-    <small>Welcome back 👋</small>
-
-    <h1>
-      Give your unused<br>
-      things a second value.
-    </h1>
-
-    <p>
-      Scan anything you no longer use and discover
-      what you can do with it.
-    </p>
-  </div>
-
-
-  <section class="hero">
-
-    <div class="hero-label">
-      ✨ SMART VALUE ENGINE
+        <div style="margin-top:10px; background:var(--lightwine); padding:12px; border-radius:40px; font-size:13px; text-align:center; color:var(--muted);">
+            <i class="fas fa-microchip"></i> AI-powered item recognition will be connected in Phase 3.
+        </div>
     </div>
 
-    <h2>
-      What are you not using anymore?
-    </h2>
-
-    <p>
-      Upload a photo and get an estimated value
-      with the best action for your item.
-    </p>
-
-    <button class="scan-btn" onclick="openScanner()">
-      📸 Scan an Item
-    </button>
-
-  </section>
-
-
-  <!-- STATS -->
-
-  <div class="stats">
-
-    <div class="stat">
-      <strong id="itemCount">0</strong>
-      <span>Items Added</span>
+    <!-- MY ITEMS -->
+    <div class="page" id="page-items">
+        <h3 style="color:var(--deep);"><i class="fas fa-boxes" style="margin-right:8px;"></i> My Items</h3>
+        <div id="itemsContainer"></div>
+        <button class="btn btn-secondary btn-sm" id="clearAllBtn" style="margin-top:4px;"><i class="fas fa-trash-alt"></i> Clear All Items</button>
     </div>
 
-    <div class="stat">
-      <strong id="totalValue">₹0</strong>
-      <span>Value Found</span>
+    <!-- PROFILE -->
+    <div class="page" id="page-profile">
+        <div class="profile-header">
+            <div class="profile-avatar">V</div>
+            <h2 style="color:var(--deep);">VALORAQ User</h2>
+            <p style="color:var(--muted);">“Give Everything a Second Value.”</p>
+            <div style="display:flex; gap:16px; margin: 8px 0 4px;">
+                <span class="phase-badge"><i class="fas fa-check-circle"></i> Phase 1</span>
+                <span class="phase-badge"><i class="fas fa-check-circle"></i> Phase 2</span>
+            </div>
+        </div>
+        <div class="card" style="margin-top:6px;">
+            <div class="flex-row" style="justify-content:space-around;">
+                <div><span class="fw-bold" id="profileItems">0</span> <span class="text-muted">analyzed</span></div>
+                <div><span class="fw-bold" id="profileValue">₹0</span> <span class="text-muted">value</span></div>
+                <div><span class="fw-bold" id="profileWaste">0 kg</span> <span class="text-muted">saved</span></div>
+            </div>
+        </div>
+        <div class="about-note">
+            <i class="fas fa-leaf" style="color:var(--wine);"></i> <strong>About VALORAQ</strong><br>
+            A smart assistant that gives your unused items a second value. <br>
+            <span style="font-size:13px;">Phase 1+2 prototype · data stored locally.</span>
+        </div>
+        <div style="margin-top:12px; font-size:13px; color:var(--muted); background:var(--soft); padding:8px 14px; border-radius:60px;">
+            <i class="fas fa-database"></i> localStorage · valoraq_items
+        </div>
     </div>
 
-    <div class="stat">
-      <strong id="wasteSaved">0 kg</strong>
-      <span>Waste Saved</span>
+    <!-- SCANNER MODAL -->
+    <div class="modal-overlay" id="scannerModal">
+        <div class="modal-card" id="modalCard">
+            <div class="modal-header">
+                <h3><i class="fas fa-camera-retro"></i> Scan & Analyze</h3>
+                <button class="modal-close" id="closeModalBtn"><i class="fas fa-times"></i></button>
+            </div>
+
+            <label class="file-label" for="imageUpload"><i class="fas fa-cloud-upload-alt"></i> Upload or take photo</label>
+            <input type="file" id="imageUpload" accept="image/*" capture="environment" style="display:none;">
+
+            <img id="previewImage" class="preview-img" style="display:none;" alt="preview" />
+
+            <select id="categorySelect">
+                <option value="Cycle / Bicycle">🚲 Cycle / Bicycle</option>
+                <option value="Phone">📱 Phone</option>
+                <option value="Laptop">💻 Laptop</option>
+                <option value="Furniture">🪑 Furniture</option>
+                <option value="Book">📚 Book</option>
+                <option value="Clothes">👕 Clothes</option>
+                <option value="Plastic / Bottle">🧴 Plastic / Bottle</option>
+                <option value="General Item">📦 General Item</option>
+            </select>
+
+            <select id="conditionSelect">
+                <option value="Like New">Like New</option>
+                <option value="Good">Good</option>
+                <option value="Used">Used</option>
+                <option value="Damaged">Damaged</option>
+            </select>
+
+            <button class="btn" id="analyzeBtn"><i class="fas fa-wand-magic-sparkles"></i> Analyze Item</button>
+            <div id="analysisResult" style="margin-top:14px; font-size:14px;"></div>
+        </div>
     </div>
 
-  </div>
-
-
-  <!-- ACTIONS -->
-
-  <section class="section">
-
-    <div class="section-head">
-      <h3>Choose an action</h3>
-      <span>Explore →</span>
+    <!-- BOTTOM NAV -->
+    <div class="bottom-nav">
+        <button class="nav-item active" data-page="page-home"><i class="fas fa-home"></i> Home</button>
+        <button class="nav-item" data-page="scan" id="navScan"><i class="fas fa-camera"></i> Scan</button>
+        <button class="nav-item" data-page="page-items"><i class="fas fa-box"></i> My Items</button>
+        <button class="nav-item" data-page="page-profile"><i class="fas fa-user"></i> Profile</button>
     </div>
-
-    <div class="actions">
-
-      <button class="action" onclick="quickAction('Sell')">
-        <div class="action-icon">💰</div>
-        <strong>Sell</strong>
-        <small>Turn unused items into money</small>
-      </button>
-
-      <button class="action" onclick="quickAction('Donate')">
-        <div class="action-icon">❤️</div>
-        <strong>Donate</strong>
-        <small>Give useful things to someone</small>
-      </button>
-
-      <button class="action" onclick="quickAction('Repair')">
-        <div class="action-icon">🔧</div>
-        <strong>Repair</strong>
-        <small>Give damaged items another life</small>
-      </button>
-
-      <button class="action" onclick="quickAction('Recycle')">
-        <div class="action-icon">♻️</div>
-        <strong>Recycle</strong>
-        <small>Keep useful materials out of waste</small>
-      </button>
-
-    </div>
-
-  </section>
-
-
-  <!-- HOW IT WORKS -->
-
-  <section class="section">
-
-    <div class="section-head">
-      <h3>How VALORAQ works</h3>
-    </div>
-
-    <div class="steps">
-
-      <div class="step">
-        <div class="step-number">1</div>
-        <strong>Scan</strong>
-        <small>Take a photo of your item.</small>
-      </div>
-
-      <div class="step">
-        <div class="step-number">2</div>
-        <strong>Analyze</strong>
-        <small>Get item value & condition.</small>
-      </div>
-
-      <div class="step">
-        <div class="step-number">3</div>
-        <strong>Decide</strong>
-        <small>Choose the best action.</small>
-      </div>
-
-    </div>
-
-  </section>
-
-</main>
-
-
-<!-- MY ITEMS -->
-
-<section class="items-section" id="itemsPage">
-
-  <div class="section-head">
-    <h3>My Items</h3>
-    <span id="itemsTotalLabel">0 items</span>
-  </div>
-
-  <div id="itemsList"></div>
-
-</section>
-
-
-<!-- PROFILE -->
-
-<section class="profile-section" id="profilePage">
-
-  <div class="profile-box">
-
-    <div class="big-profile">
-      BS
-    </div>
-
-    <h2>VALORAQ User</h2>
-
-    <p>
-      Your unused items deserve a second value.
-    </p>
-
-  </div>
-
-</section>
-
-
-<!-- BOTTOM NAV -->
-
-<nav class="bottom-nav">
-
-  <button
-    class="nav-item active"
-    onclick="showPage('home',this)"
-  >
-    <div>🏠</div>
-    Home
-  </button>
-
-  <button
-    class="nav-item"
-    onclick="openScanner()"
-  >
-    <div>📸</div>
-    Scan
-  </button>
-
-  <button
-    class="nav-item"
-    onclick="showPage('items',this)"
-  >
-    <div>📦</div>
-    My Items
-  </button>
-
-  <button
-    class="nav-item"
-    onclick="showPage('profile',this)"
-  >
-    <div>👤</div>
-    Profile
-  </button>
-
-</nav>
-
 </div>
-
-
-<!-- SCANNER MODAL -->
-
-<div class="modal" id="scannerModal">
-
-  <div class="modal-content">
-
-    <div class="modal-top"></div>
-
-    <div class="modal-header">
-
-      <h2>Scan Your Item</h2>
-
-      <button
-        class="close"
-        onclick="closeScanner()"
-      >
-        ✕
-      </button>
-
-    </div>
-
-
-    <!-- UPLOAD -->
-
-    <div class="upload">
-
-      <div class="upload-icon">
-        📸
-      </div>
-
-      <p>
-        Take a photo or upload an image<br>
-        of your unused item.
-      </p>
-
-      <label
-        class="upload-label"
-        for="imageInput"
-      >
-        Choose Photo
-      </label>
-
-      <input
-        id="imageInput"
-        type="file"
-        accept="image/*"
-        capture="environment"
-        onchange="previewImage(event)"
-      >
-
-    </div>
-
-
-    <img
-      id="preview"
-      alt="Item Preview"
-    >
-
-
-    <!-- ITEM NAME -->
-
-    <div class="field">
-
-      <label>
-        What is the item?
-      </label>
-
-      <input
-        id="itemName"
-        type="text"
-        placeholder="Example: Old mobile phone"
-      >
-
-    </div>
-
-
-    <!-- CONDITION -->
-
-    <div class="field">
-
-      <label>
-        Condition
-      </label>
-
-      <select id="condition">
-
-        <option value="">
-          Select condition
-        </option>
-
-        <option value="Like New">
-          Like New
-        </option>
-
-        <option value="Good">
-          Good
-        </option>
-
-        <option value="Used">
-          Used
-        </option>
-
-        <option value="Damaged">
-          Damaged
-        </option>
-
-      </select>
-
-    </div>
-
-
-    <button
-      class="analyze"
-      onclick="analyzeItem()"
-    >
-      🤖 Analyze Item
-    </button>
-
-
-    <!-- LOADING -->
-
-    <div
-      class="loading"
-      id="loading"
-    >
-
-      <div class="spinner"></div>
-
-      <strong>
-        Analyzing your item...
-      </strong>
-
-      <small>
-        Finding the best second value
-      </small>
-
-    </div>
-
-
-    <!-- RESULT -->
-
-    <div
-      class="result"
-      id="result"
-    >
-
-      <div class="result-top">
-
-        <span class="result-badge">
-          ✨ ANALYSIS COMPLETE
-        </span>
-
-        <h3 id="resultItem">
-          Item Analysis
-        </h3>
-
-        <div
-          class="value"
-          id="estimatedValue"
-        >
-          ₹500 – ₹1,000
-        </div>
-
-        <div class="result-sub">
-          Estimated value range
-        </div>
-
-      </div>
-
-
-      <div class="recommend">
-
-        <div class="recommend-title">
-          BEST ACTION
-        </div>
-
-        <strong id="recommendation">
-          Sell 💰
-        </strong>
-
-        <p id="recommendText">
-          This item may have good resale value.
-        </p>
-
-      </div>
-
-
-      <div class="result-actions">
-
-        <button
-          class="result-action"
-          onclick="chooseResult('Sell')"
-        >
-          💰 Sell
-        </button>
-
-        <button
-          class="result-action"
-          onclick="chooseResult('Donate')"
-        >
-          ❤️ Donate
-        </button>
-
-        <button
-          class="result-action"
-          onclick="chooseResult('Repair')"
-        >
-          🔧 Repair
-        </button>
-
-        <button
-          class="result-action"
-          onclick="chooseResult('Recycle')"
-        >
-          ♻️ Recycle
-        </button>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- TOAST -->
-
-<div
-  class="toast"
-  id="toast"
-></div>
-
 
 <script>
+    (function() {
+        "use strict";
 
-/* =========================
-   VALORAQ PHASE 2
-========================= */
-
-
-let items = JSON.parse(
-  localStorage.getItem("valoraq_items") || "[]"
-);
-
-
-/* INITIAL LOAD */
-
-updateStats();
-renderItems();
-
-
-/* =========================
-   SCANNER
-========================= */
-
-function openScanner(){
-
-  document
-    .getElementById("scannerModal")
-    .classList.add("show");
-
-}
-
-
-function closeScanner(){
-
-  document
-    .getElementById("scannerModal")
-    .classList.remove("show");
-
-}
-
-
-/* =========================
-   IMAGE PREVIEW
-========================= */
-
-function previewImage(event){
-
-  const file = event.target.files[0];
-
-  if(!file) return;
-
-  const preview =
-    document.getElementById("preview");
-
-  preview.src =
-    URL.createObjectURL(file);
-
-  preview.style.display = "block";
-
-  showToast("Photo selected 📸");
-
-}
-
-
-/* =========================
-   ANALYZE ITEM
-========================= */
-
-function analyzeItem(){
-
-  const name =
-    document
-      .getElementById("itemName")
-      .value
-      .trim();
-
-  const condition =
-    document
-      .getElementById("condition")
-      .value;
-
-
-  if(!name){
-
-    showToast(
-      "Please enter the item name"
-    );
-
-    return;
-  }
-
-
-  if(!condition){
-
-    showToast(
-      "Please select item condition"
-    );
-
-    return;
-  }
-
-
-  const loading =
-    document.getElementById("loading");
-
-  const result =
-    document.getElementById("result");
-
-
-  result.style.display = "none";
-
-  loading.style.display = "block";
-
-
-  /*
-    Phase 2 prototype engine.
-
-    Real AI image recognition will
-    be connected through a secure
-    backend/API in a later phase.
-  */
-
-
-  setTimeout(function(){
-
-    let value = "₹100 – ₹300";
-
-    let recommendation =
-      "Recycle ♻️";
-
-    let reason =
-      "This item may be better suited for responsible recycling.";
-
-
-    const lower =
-      name.toLowerCase();
-
-
-    /* ELECTRONICS */
-
-    if(
-      lower.includes("phone") ||
-      lower.includes("mobile") ||
-      lower.includes("iphone") ||
-      lower.includes("smartphone")
-    ){
-
-      value =
-        condition === "Like New"
-        ? "₹3,000 – ₹12,000"
-        : condit
+        // ---------- SAFE HTML ----------
+        function escapeHTML(str) {
+            if (!str) return '';
+            const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
